@@ -1,0 +1,6 @@
+{
+  "authSelections": "userPoolOnly",
+  "resourceName": "serverlessapp",
+  "serviceType": "imported",
+  "region": "us-west-2"
+}

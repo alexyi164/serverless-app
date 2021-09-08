@@ -1,0 +1,25 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify5e05dc1881904-staging-234323-authRole",
+      "UnauthRoleArn": "arn:aws:iam::924989782360:role/amplify-amplify5e05dc1881904-staging-234323-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::924989782360:role/amplify-amplify5e05dc1881904-staging-234323-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-amplify5e05dc1881904-staging-234323-deployment",
+      "UnauthRoleName": "amplify-amplify5e05dc1881904-staging-234323-unauthRole",
+      "StackName": "amplify-amplify5e05dc1881904-staging-234323",
+      "StackId": "arn:aws:cloudformation:us-west-2:924989782360:stack/amplify-amplify5e05dc1881904-staging-234323/8eb866f0-10fe-11ec-9126-0a41e48208f7",
+      "AmplifyAppId": "d1w8tgvpd54yqi"
+    },
+    "categories": {
+      "auth": {
+        "serverlessapp": {
+          "userPoolId": "us-west-2_oGXMUklaf",
+          "userPoolName": "ServerlessProjectAuthA",
+          "webClientId": "22n7nouem48ov05ntaflre5pbb",
+          "nativeClientId": "22n7nouem48ov05ntaflre5pbb"
+        }
+      }
+    }
+  }
+}
