@@ -31,7 +31,7 @@ function App() {
       }
     }
 
-    const data = await API.get('serverlessAPI', 'hello', requestInfo) 
+    const data = await API.get('serverlessAPI', '/hello', requestInfo) 
     console.log(data);
   }
 
