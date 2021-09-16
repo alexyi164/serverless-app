@@ -1,0 +1,45 @@
+{
+  "paths": [
+    {
+      "name": "/hello",
+      "lambdaFunction": "serverlessLambda",
+      "privacy": {
+        "protected": true,
+        "auth": [
+          "/POST",
+          "/GET",
+          "/PUT",
+          "/PATCH",
+          "/DELETE"
+        ],
+        "unauth": [
+          "/GET"
+        ]
+      },
+      "policyResourceName": "/hello"
+    }
+  ],
+  "resourceName": "serverlessAPI",
+  "apiName": "serverlessAPI",
+  "functionArns": [
+    {
+      "lambdaFunction": "serverlessLambda"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 1,
+    "authRoleName": "amplify-amplifyaeb4d53e340e4-staging-230319-authRole",
+    "unAuthRoleName": "amplify-amplifyaeb4d53e340e4-staging-230319-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "serverlessLambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

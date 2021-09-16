@@ -10,6 +10,17 @@
       "StackName": "amplify-amplifyaeb4d53e340e4-staging-230319",
       "StackId": "arn:aws:cloudformation:us-west-2:924989782360:stack/amplify-amplifyaeb4d53e340e4-staging-230319/48dd8440-1742-11ec-810a-0295ca432535",
       "AmplifyAppId": "d37pb2h7q5dju"
+    },
+    "categories": {
+      "auth": {
+        "serverlessapp553f2d53": {}
+      },
+      "function": {
+        "serverlessLambda": {
+          "deploymentBucketName": "amplify-amplifyaeb4d53e340e4-staging-230319-deployment",
+          "s3Key": "amplify-builds/serverlessLambda-6c326174396466436c75-build.zip"
+        }
+      }
     }
   }
 }
