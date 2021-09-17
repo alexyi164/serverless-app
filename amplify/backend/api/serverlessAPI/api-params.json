@@ -13,7 +13,6 @@
           "/DELETE"
         ],
         "unauth": [
-          "/GET"
         ]
       },
       "policyResourceName": "/hello"
