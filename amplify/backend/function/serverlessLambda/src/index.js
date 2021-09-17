@@ -9,6 +9,7 @@ exports.handler = async (event) => {
         statusCode: 200,
     //  Uncomment below to enable CORS requests
      headers: {
+         "Access-Control-Allow-Credentials": true,
          "Access-Control-Allow-Origin": "*",
          "Access-Control-Allow-Headers": "*"
      }, 

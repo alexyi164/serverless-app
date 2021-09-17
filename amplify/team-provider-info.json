@@ -18,7 +18,7 @@
       "function": {
         "serverlessLambda": {
           "deploymentBucketName": "amplify-amplifyaeb4d53e340e4-staging-230319-deployment",
-          "s3Key": "amplify-builds/serverlessLambda-6c326174396466436c75-build.zip"
+          "s3Key": "amplify-builds/serverlessLambda-586575596c506f505a31-build.zip"
         }
       }
     }
