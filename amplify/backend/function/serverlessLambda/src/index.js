@@ -1,6 +1,6 @@
 
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
   if (event.requestContext.authorizer) {
     console.log('claims: ', event.requestContext.authorizer.claims)
   }
@@ -9,12 +9,11 @@ exports.handler = async (event) => {
         statusCode: 200,
     //  Uncomment below to enable CORS requests
      headers: {
-         "Access-Control-Allow-Credentials": true,
-         "Access-Control-Allow-Origin": "*",
-         "Access-Control-Allow-Headers": "*",
-         "Access-Control-Allow-Methods": "*"
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
      }, 
         body: JSON.stringify('Hello from Lambda!'),
     };
+    console.log('body: ', event.body);
     return response;
 };

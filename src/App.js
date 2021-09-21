@@ -20,31 +20,45 @@ import { FloatingLabel } from 'react-bootstrap';
 
 function App() {
 
-  async function callAPI(){
+  let imageID = 'ami-0c2d06d50ce30b442';
+  let instanceType = 't2.micro';
+  let keyName = 'key';
+  let subnetID = 'ID';
+
+  async function callAPI(e){
+    e.preventDefault();
     const user = await Auth.currentAuthenticatedUser()
     const token = user.signInUserSession.idToken.jwtToken
     console.log({ token });
 
     const requestInfo = {
+      body: {
+        instanceType: 't.2micro',
+      },
       headers: {
-        "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Contorl-Allow-Methods": "*",
-        Authorization: token
       }
     }
 
-    const data = await API.get('serverlessAPI', '/hello', requestInfo) 
+    const data = await API.get('serverlessAPI', `/launchEC2-ServerlessProjectA?AMI=${imageID}&instanceType=${instanceType}`) 
     console.log(data);
   }
 
-  const [imageID, setImageID] = useState('none')
-  const [instanceType, setInstanceType] = useState('none')
-  const [keyName, setKeyName] = useState('none')
-  const [subnetID, setSubnetID] = useState('none')
+  // const [imageID, setImageID] = useState('ami-0c2d06d50ce30b442')
+  // const [instanceType, setInstanceType] = useState('none')
+  // const [keyName, setKeyName] = useState('none')
+  // const [subnetID, setSubnetID] = useState('none')
 
   const [instanceList, setInstanceList] = useState(<div></div>)
+
+  const handleAMI = (e) => {
+    imageID = e.target.value;
+    console.log(imageID);
+  }
+  
+  const handleType = (e) => {
+    instanceType = e.target.value;
+    console.log(instanceType);
+  }
 
   return (
     <div className="App">
@@ -57,10 +71,10 @@ function App() {
         <Form>
           <Row>
             <Col md>
-              <FloatingLabel controlId="floatingSelectGrid" label="Works with selects">
-                <Form.Select aria-label="Floating label select example">
-                  <option>Open this select menu</option>
-                  <option value="1">One</option>
+              <FloatingLabel controlId="floatingSelectGrid" label="Image ID">
+                <Form.Select onChange={(e) => handleAMI(e)} aria-label="Floating label select example" value=''>
+                  <option>Choose an AMI</option>
+                  <option value="ami-0c2d06d50ce30b442">Default</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </Form.Select>
@@ -68,25 +82,25 @@ function App() {
             </Col>
 
             <Col md>
-              <FloatingLabel controlId="floatingInputGrid" label="Email address">
-                <Form.Control type="email" placeholder="name@example.com" />
+              <FloatingLabel controlId="floatingInputGrid" label="Key Name">
+                <Form.Control type="key" placeholder="key" />
               </FloatingLabel>
             </Col>
 
             <Col md>
-              <FloatingLabel controlId="floatingSelectGrid" label="Works with selects">
-                <Form.Select aria-label="Floating label select example">
-                  <option>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+              <FloatingLabel controlId="floatingSelectGrid" label="Instance Type">
+                <Form.Select onChange={(e) => handleType(e)} aria-label="Floating label select example">
+                  <option>Choose an Instance Type</option>
+                  <option value="t2.micro">t2.micro</option>
+                  <option value="t2.small">t2.small</option>
+                  <option value="t3.micro">t3.micro</option>
                 </Form.Select>
               </FloatingLabel>
             </Col>
           </Row>
           <br></br>
-          <Button variant="primary" type="submit" >
-            Submit
+          <Button onSubmit={(e) => callAPI(e)} variant="primary" type="submit" >
+            Instance Me!
           </Button>
         </Form>
         <br></br>
