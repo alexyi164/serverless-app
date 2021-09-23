@@ -1,4 +1,5 @@
 import './App.css';
+import TableItem from './TableItem.js';
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -24,23 +25,34 @@ function App() {
   let instanceType = 't2.micro';
   let keyName = 'key';
   let subnetID = 'ID';
+  let instanceID = '';
+  let publicIP = '';
+  let launchTime = '';
 
   async function callAPI(e){
     e.preventDefault();
+    setCount(count + 1);
+    console.log(e);
     const user = await Auth.currentAuthenticatedUser()
     const token = user.signInUserSession.idToken.jwtToken
     console.log({ token });
 
-    const requestInfo = {
-      body: {
-        instanceType: 't.2micro',
-      },
-      headers: {
-      }
-    }
+    // const requestInfo = {
+    //   "headers": {
+    //     "Authentication": token
+    //   }
+    // }
 
     const data = await API.get('serverlessAPI', `/launchEC2-ServerlessProjectA?AMI=${imageID}&instanceType=${instanceType}`) 
-    console.log(data);
+    instanceID = JSON.stringify(data.instanceId);
+    console.log(instanceID);
+    setInstanceList(instanceList => [...instanceList, {
+      count: count,
+      instanceID: instanceID,
+      publicIP: 'dummy',
+      launchTime: 'dummy'
+    }])
+    console.log(instanceList)
   }
 
   // const [imageID, setImageID] = useState('ami-0c2d06d50ce30b442')
@@ -48,7 +60,8 @@ function App() {
   // const [keyName, setKeyName] = useState('none')
   // const [subnetID, setSubnetID] = useState('none')
 
-  const [instanceList, setInstanceList] = useState(<div></div>)
+  const [instanceList, setInstanceList] = useState([])
+  const [count, setCount] = useState(0)
 
   const handleAMI = (e) => {
     imageID = e.target.value;
@@ -65,10 +78,9 @@ function App() {
       <div>
         <AmplifySignOut buttonText="Log Out"></AmplifySignOut>
       </div>
-      <Button onClick={callAPI}>Call API</Button>
       <br></br>
       <Container>
-        <Form>
+        <Form onSubmit={(e) => callAPI(e)}>
           <Row>
             <Col md>
               <FloatingLabel controlId="floatingSelectGrid" label="Image ID">
@@ -99,7 +111,7 @@ function App() {
             </Col>
           </Row>
           <br></br>
-          <Button onSubmit={(e) => callAPI(e)} variant="primary" type="submit" >
+          <Button variant="primary" type="submit" >
             Instance Me!
           </Button>
         </Form>
@@ -108,18 +120,17 @@ function App() {
           <thead>
             <tr>
               <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+              <th>Instance ID</th>
+              <th>Instance Public IP</th>
+              <th>Launch Time</th>
             </tr>
           </thead>
+          {/* <tbody>
+            {instanceList}
+          </tbody> */}
           <tbody>
-            <tr>
-              <td>{instanceType}</td>
-              <td></td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+            {instanceList.map(instance =>
+              <TableItem instance={instance} key={instance.count}/>)}
           </tbody>
         </Table>
       </Container>
