@@ -18,6 +18,10 @@ import { Col } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { FloatingLabel } from 'react-bootstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
+
 
 function App() {
 
@@ -29,7 +33,7 @@ function App() {
   let publicIP = '';
   let launchTime = '';
 
-  async function callAPI(e){
+  async function callAPI(e) {
     e.preventDefault();
     setCount(count + 1);
     console.log(e);
@@ -37,28 +41,19 @@ function App() {
     const token = user.signInUserSession.idToken.jwtToken
     console.log({ token });
 
-    // const requestInfo = {
-    //   "headers": {
-    //     "Authentication": token
-    //   }
-    // }
-
     const data = await API.get('serverlessAPI', `/launchEC2-ServerlessProjectA?AMI=${imageID}&instanceType=${instanceType}`) 
-    instanceID = JSON.stringify(data.instanceId);
-    console.log(instanceID);
-    setInstanceList(instanceList => [...instanceList, {
-      count: count,
-      instanceID: instanceID,
-      publicIP: 'dummy',
-      launchTime: 'dummy'
-    }])
-    console.log(instanceList)
   }
 
-  // const [imageID, setImageID] = useState('ami-0c2d06d50ce30b442')
-  // const [instanceType, setInstanceType] = useState('none')
-  // const [keyName, setKeyName] = useState('none')
-  // const [subnetID, setSubnetID] = useState('none')
+  async function updateTable(e) {
+    e.preventDefault();
+
+    const data = await API
+    .get('serverlessAPI', `/CheckEC2Status-ServerlessProjectA`)
+    .then(data => setInstanceList(data));
+
+    console.log(instanceList);
+
+  }
 
   const [instanceList, setInstanceList] = useState([])
   const [count, setCount] = useState(0)
@@ -84,18 +79,12 @@ function App() {
           <Row>
             <Col md>
               <FloatingLabel controlId="floatingSelectGrid" label="Image ID">
-                <Form.Select onChange={(e) => handleAMI(e)} aria-label="Floating label select example" value=''>
+                <Form.Select onChange={(e) => handleAMI(e)} aria-label="Floating label select example">
                   <option>Choose an AMI</option>
                   <option value="ami-0c2d06d50ce30b442">Default</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option value="ami-02e7fad8336aa2c57">SuperCool</option>
+                  <option value="ami-02e7fad8336aa2c57">ExtraCool</option>
                 </Form.Select>
-              </FloatingLabel>
-            </Col>
-
-            <Col md>
-              <FloatingLabel controlId="floatingInputGrid" label="Key Name">
-                <Form.Control type="key" placeholder="key" />
               </FloatingLabel>
             </Col>
 
@@ -111,16 +100,21 @@ function App() {
             </Col>
           </Row>
           <br></br>
-          <Button variant="primary" type="submit" >
-            Instance Me!
+          <Button variant="dark" type="submit" >
+            <strong>Instance Me!</strong>
           </Button>
         </Form>
+        <br></br>
+        <hr></hr>
+        <br></br>
+        <Button variant="dark" onClick={(e) => updateTable(e)}><FontAwesomeIcon icon={faCircleNotch}/></Button>
+        <br></br>
         <br></br>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>#</th>
               <th>Instance ID</th>
+              <th>Instance Type</th>
               <th>Instance Public IP</th>
               <th>Launch Time</th>
             </tr>
@@ -130,7 +124,7 @@ function App() {
           </tbody> */}
           <tbody>
             {instanceList.map(instance =>
-              <TableItem instance={instance} key={instance.count}/>)}
+              <TableItem instance={instance} key={instance.InstanceId}/>)}
           </tbody>
         </Table>
       </Container>
