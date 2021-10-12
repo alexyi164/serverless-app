@@ -20,6 +20,12 @@
           "deploymentBucketName": "amplify-amplifyaeb4d53e340e4-staging-230319-deployment",
           "s3Key": "amplify-builds/serverlessLambda-7169726d713872496e38-build.zip"
         }
+      },
+      "interactions": {
+        "serverlessLex": {
+          "deploymentBucketName": "amplify-amplifyaeb4d53e340e4-staging-230319-deployment",
+          "s3Key": "amplify-builds/serverlessLex-64747a5361724d787258-build.zip"
+        }
       }
     }
   }

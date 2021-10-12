@@ -28,6 +28,14 @@ const awsmobile = {
             "endpoint": "https://yewavewaq7.execute-api.us-west-2.amazonaws.com/staging",
             "region": "us-west-2"
         }
+    ],
+    "aws_bots": "enable",
+    "aws_bots_config": [
+        {
+            "name": "BookTrip_staging",
+            "alias": "$LATEST",
+            "region": "us-west-2"
+        }
     ]
 };
 

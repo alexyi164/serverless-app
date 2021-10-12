@@ -21,6 +21,12 @@ import { FloatingLabel } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
+import Amplify from "aws-amplify";
+import {AmplifyChatbot} from "@aws-amplify/ui-react";
+import awsconfig from "./aws-exports";
+
+Amplify.configure(awsconfig);
+
 
 
 function App() {
@@ -128,6 +134,12 @@ function App() {
           </tbody>
         </Table>
       </Container>
+      <AmplifyChatbot
+        botName="yourBotName"
+        botTitle="My ChatBot"
+        welcomeMessage="Hello, how can I help you?"
+        textEnabled="true"
+      />    
     </div>
   );
 }

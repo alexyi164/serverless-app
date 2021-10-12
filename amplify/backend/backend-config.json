@@ -45,5 +45,12 @@
         }
       ]
     }
+  },
+  "interactions": {
+    "serverlessLex": {
+      "service": "Lex",
+      "providerPlugin": "awscloudformation",
+      "build": true
+    }
   }
 }
